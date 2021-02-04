@@ -9,6 +9,7 @@ database_path = "sqlite:///{}".format(os.path.join(project_dir, database_filenam
 
 db = SQLAlchemy()
 
+
 '''
 setup_db(app)
     binds a flask application and a SQLAlchemy service
@@ -18,6 +19,7 @@ def setup_db(app):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
+
 
 '''
 db_drop_and_create_all()
@@ -42,13 +44,20 @@ class Drink(db.Model):
     # the required datatype is [{'color': string, 'name':string, 'parts':number}]
     recipe =  Column(String(180), nullable=False)
 
+    def __init__(self, title, recipe):
+        self.title = title
+        self.recipe = recipe
+        
     '''
     short()
         short form representation of the Drink model
     '''
     def short(self):
         print(json.loads(self.recipe))
-        short_recipe = [{'color': r['color'], 'parts': r['parts']} for r in json.loads(self.recipe)]
+        #short_recipe = [{'color': r['color'], 'parts': r['parts']} for r in json.loads(self.recipe)]
+        r = json.loads(self.recipe)
+        short_recipe = [{'color': r['color'], 'parts': r['parts']}]
+
         return {
             'id': self.id,
             'title': self.title,
@@ -77,7 +86,10 @@ class Drink(db.Model):
     '''
     def insert(self):
         db.session.add(self)
+        print("self")
         db.session.commit()
+        print("check2")
+
 
     '''
     delete()

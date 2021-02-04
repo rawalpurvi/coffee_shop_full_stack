@@ -61,7 +61,7 @@ The `--reload` flag will detect file changes and restart the server automaticall
         - Enable Add Permissions in the Access Token
 5. Create new API permissions:
     - `get:drinks-detail`
-    - `post:drinks`
+    - `post:drinks`st
     - `patch:drinks`
     - `delete:drinks`
 6. Create new roles for:
