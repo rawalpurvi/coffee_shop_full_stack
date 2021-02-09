@@ -120,10 +120,10 @@ export class DrinksService {
       .subscribe( (res: any) => {
         if (res.success) {
           this.drinksToItems(res.drinks);
+          window.location.reload()
         }
       });
     }
-
   }
 
   deleteDrink(drink: Drink) {
